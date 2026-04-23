@@ -90,9 +90,9 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero-img.webp" 
+          src="/ab.png" 
           alt="Abschleppwagen im Einsatz auf Autobahn" 
-          className="w-full h-full object-cover opacity-70"
+          className="w-full h-full object-cover opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
       </div>
