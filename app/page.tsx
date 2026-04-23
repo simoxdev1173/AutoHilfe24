@@ -90,9 +90,9 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero-image.jpeg" 
+          src="/hero-img.webp" 
           alt="Abschleppwagen im Einsatz auf Autobahn" 
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
       </div>
@@ -101,7 +101,7 @@ const Hero = () => {
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 border border-red-500/30 text-red-400 text-sm font-semibold mb-6">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            Deutschlandweit 24/7 im Einsatz
+            Hamburgweit 24/7 im Einsatz
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
             Schnelle Hilfe, <br />
@@ -427,7 +427,6 @@ const WhatsAppWidget = () => {
   const [showPrompt, setShowPrompt] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Auto-show a teaser bubble after 8s if user hasn't interacted
   useEffect(() => {
     const t = setTimeout(() => {
       if (!hasInteracted) setShowPrompt(true);
@@ -450,7 +449,6 @@ const WhatsAppWidget = () => {
 
   return (
     <>
-      {/* Floating Button + Panel Container */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] flex flex-col items-end gap-3">
         {/* Teaser bubble */}
         <AnimatePresence>
@@ -459,32 +457,19 @@ const WhatsAppWidget = () => {
               initial={{ opacity: 0, x: 20, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 20, scale: 0.9 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               onClick={handleToggle}
               className="relative max-w-[calc(100vw-2rem)] sm:max-w-[280px] bg-white text-slate-900 px-4 py-3 shadow-2xl rounded-lg border border-slate-900/10 hover:border-[#25D366] transition text-left group"
             >
-              <div
-                className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-slate-900/10 rotate-45"
-                style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
-              />
+              <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-slate-900/10 rotate-45" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }} />
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-                <span className="font-mono text-[9px] uppercase tracking-widest text-slate-400">
-                  Einsatzzentrale · Online
-                </span>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-slate-400">Einsatzzentrale · Online</span>
               </div>
               <div className="text-sm leading-snug font-medium">
-                Brauchen Sie Hilfe?{" "}
-                <span className="text-[#25D366]">Antwort in &lt; 2 Min.</span>
+                Brauchen Sie Hilfe? <span className="text-[#25D366]">Antwort in &lt; 2 Min.</span>
               </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowPrompt(false);
-                }}
-                className="absolute -top-2 -right-2 w-5 h-5 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transition"
-                aria-label="Benachrichtigung schließen"
-              >
+              {/* Close X */}
+              <button onClick={(e) => { e.stopPropagation(); setShowPrompt(false); }} className="absolute -top-2 -right-2 w-5 h-5 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transition">
                 <X className="w-3 h-3" />
               </button>
             </motion.button>
@@ -498,199 +483,109 @@ const WhatsAppWidget = () => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="w-[360px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl rounded-xl overflow-hidden border border-slate-900/10 flex flex-col"
+              className="w-[360px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl rounded-xl overflow-hidden border border-slate-900/10 flex flex-col max-h-[80vh] sm:max-h-[650px]"
             >
-              {/* Header */}
-              <div className="relative bg-[#25D366] text-white p-5">
-                <div className="absolute inset-0 opacity-20">
-                  <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                      <pattern id="wa-dots" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="0.8" fill="white" />
-                      </pattern>
-                    </defs>
-                    <rect width="100" height="100" fill="url(#wa-dots)" />
-                  </svg>
-                </div>
+              {/* Fixed Header */}
+              <div className="relative bg-[#25D366] text-white p-4 shrink-0">
                 <div className="relative flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="relative">
-                      <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-                        {/* Header WhatsApp Image */}
-                        <img 
-                          src="/whatsapp.png" 
-                          alt="WhatsApp" 
-                          className="w-6 h-6 object-contain"
-                        />
+                      <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                        <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
                       </div>
-                      <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] rounded-full border-2 border-white" />
+                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#25D366] rounded-full border-2 border-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-lg leading-tight">
-                        AutoHilfe24
-                      </div>
-                      <div className="flex items-center gap-1.5 text-xs opacity-95">
+                      <div className="font-bold text-base leading-tight">AutoHilfe24</div>
+                      <div className="flex items-center gap-1.5 text-[10px] opacity-95">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                         <span>Einsatzzentrale · Online</span>
                       </div>
                     </div>
                   </div>
-                  <button
-                    onClick={handleToggle}
-                    className="w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center transition"
-                    aria-label="Schließen"
-                  >
+                  <button onClick={handleToggle} className="w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center transition">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
 
-              {/* Message area */}
-              <div
-                className="px-5 py-6 space-y-3"
-                style={{
-                  background:
-                    "linear-gradient(180deg, #ECE5DD 0%, #E6DED5 100%)",
-                }}
-              >
-                {/* Agent message */}
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="flex"
-                >
-                  <div className="relative max-w-[85%] bg-white px-3.5 py-2.5 rounded-lg rounded-tl-none shadow-sm">
-                    <div className="font-mono text-[9px] text-[#25D366] font-semibold tracking-wider uppercase mb-0.5">
-                      Dispatcher · Max
-                    </div>
-                    <div className="text-sm text-slate-900 leading-relaxed">
-                      Hallo! 👋 Ich bin Max aus der Einsatzzentrale.
-                      <br />
-                      Wobei kann ich Ihnen helfen?
-                    </div>
-                    <div className="text-[10px] text-slate-400 text-right mt-1 font-mono">
-                      gerade eben
+              {/* Scrollable Middle Area (Messages + Quick Replies) */}
+              <div className="flex-1 overflow-y-auto bg-[#ECE5DD] custom-scrollbar">
+                {/* Agent Messages */}
+                <div className="px-4 py-5 space-y-3">
+                  <div className="flex">
+                    <div className="relative max-w-[85%] bg-white px-3.5 py-2 rounded-lg rounded-tl-none shadow-sm">
+                      <div className="font-mono text-[9px] text-[#25D366] font-semibold tracking-wider uppercase mb-0.5">Dispatcher · Max</div>
+                      <div className="text-sm text-slate-900 leading-relaxed">Hallo! 👋 Ich bin Max. Wobei kann ich helfen?</div>
                     </div>
                   </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 }}
-                  className="flex"
-                >
-                  <div className="relative max-w-[85%] bg-white px-3.5 py-2.5 rounded-lg rounded-tl-none shadow-sm">
-                    <div className="text-sm text-slate-900 leading-relaxed">
-                      Wählen Sie unten Ihr Anliegen — oder schreiben Sie direkt
-                      los. ⬇️
-                    </div>
-                    <div className="text-[10px] text-slate-400 text-right mt-1 font-mono">
-                      gerade eben
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Quick replies */}
-              <div className="p-4 bg-white border-t border-slate-900/10 space-y-2">
-                <div className="font-mono text-[10px] tracking-widest uppercase text-slate-400 mb-2 px-1">
-                  — Schnellauswahl
                 </div>
-                {quickReplies.map((r, i) => (
-                  <motion.button
-                    key={r.label}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.35 + i * 0.05 }}
-                    onClick={() => openWhatsApp(r.message)}
-                    className="active:scale-95 w-full flex items-center gap-3 px-3.5 py-3 border border-slate-900/10 rounded-md hover:border-[#25D366] hover:bg-[#25D366]/5 transition text-left group"
+
+                {/* Quick replies section */}
+                <div className="p-4 bg-white/60 backdrop-blur-sm border-t border-slate-900/5 space-y-2">
+                  <div className="font-mono text-[9px] tracking-widest uppercase text-slate-500 mb-2 px-1">
+                    — Schnellauswahl
+                  </div>
+                  {quickReplies.map((r, i) => (
+                    <motion.button
+                      key={r.label}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      onClick={() => openWhatsApp(r.message)}
+                      className="active:scale-[0.98] w-full flex items-center gap-3 px-3 py-2.5 border border-slate-900/10 bg-white rounded-lg hover:border-[#25D366] hover:bg-[#25D366]/5 transition text-left group"
+                    >
+                      <div className="w-7 h-7 rounded-full bg-slate-900/5 group-hover:bg-[#25D366] group-hover:text-white flex items-center justify-center transition shrink-0">
+                        <r.icon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="flex-1 text-xs font-semibold text-slate-900">
+                        {r.label}
+                      </span>
+                      <span className="text-[#25D366] text-lg opacity-0 group-hover:opacity-100 transition">→</span>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Fixed Footer Actions */}
+              <div className="p-3 bg-slate-900 text-white shrink-0">
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href={`https://wa.me/${PHONE}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md flex items-center justify-center gap-2 bg-[#25D366] py-2.5 text-xs font-bold hover:brightness-110 transition"
                   >
-                    <div className="w-8 h-8 rounded-full bg-slate-900/5 group-hover:bg-[#25D366] group-hover:text-white flex items-center justify-center transition">
-                      <r.icon className="w-4 h-4" strokeWidth={2} />
-                    </div>
-                    <span className="flex-1 text-sm font-medium text-slate-900">
-                      {r.label}
-                    </span>
-                    <span className="text-[#25D366] opacity-0 group-hover:opacity-100 transition">
-                      →
-                    </span>
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Footer actions - Restored Anrufen and used custom image */}
-              <div className="p-4 bg-slate-900 text-white grid grid-cols-2 gap-2">
-                <a
-                  href={`https://wa.me/${PHONE}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setHasInteracted(true)}
-                  className="active:scale-95 rounded-md flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 text-sm font-semibold hover:brightness-110 transition"
-                >
-                  <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4 object-contain brightness-0 invert" />
-                  WhatsApp
-                </a>
-                <a
-                  href={`tel:+${PHONE}`}
-                  className="active:scale-95 rounded-md flex items-center justify-center gap-2 border border-slate-100/20 py-3 text-sm font-semibold hover:bg-slate-100/10 transition"
-                >
-                  <Phone className="w-4 h-4" strokeWidth={2.5} />
-                  Anrufen
-                </a>
-              </div>
-
-              <div className="px-4 py-2.5 bg-slate-800 border-t border-slate-100/5 text-center">
-                <div className="font-mono text-[10px] tracking-wider text-slate-400 uppercase">
-                  Verschlüsselt · DSGVO-konform · {DISPLAY_PHONE}
+                    <img src="/whatsapp.png" alt="W" className="w-3.5 h-3.5 brightness-0 invert" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`tel:+${PHONE}`}
+                    className="rounded-md flex items-center justify-center gap-2 border border-white/20 py-2.5 text-xs font-bold hover:bg-white/10 transition"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    Anrufen
+                  </a>
+                </div>
+                <div className="mt-3 text-center">
+                  <div className="font-mono text-[8px] tracking-wider text-slate-400 uppercase">
+                    Verschlüsselt · DSGVO-konform
+                  </div>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Main button - No pulse animation, using custom image */}
+        {/* Main Floating Button */}
         <motion.button
           onClick={handleToggle}
           whileTap={{ scale: 0.92 }}
-          whileHover={{ scale: 1.05 }}
-          className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center transition shadow-xl shadow-[#25D366]/30"
-          aria-label={open ? "Chat schließen" : "WhatsApp Chat öffnen"}
+          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center transition shadow-xl shadow-[#25D366]/30"
         >
-          <AnimatePresence mode="wait">
-            {open ? (
-              <motion.div
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <X className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={2.5} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="open"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {/* Main floating button WhatsApp Image */}
-                <img 
-                  src="/whatsapp.png" 
-                  alt="WhatsApp" 
-                  className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Unread badge */}
+          {open ? <X className="w-6 h-6 sm:w-7 sm:h-7" /> : <img src="/whatsapp.png" className="w-7 h-7 sm:w-8 sm:h-8" />}
           {!open && !hasInteracted && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold font-mono border-2 border-white">
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold border-2 border-white">
               1
             </span>
           )}
